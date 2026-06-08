@@ -3,454 +3,760 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalender AdSense YouTube - Gaya Geometri</title>
+    <title>Bauhaus Local Storage Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Font bergaya retro/geometri -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    },
-                    colors: {
-                        'retro-pink': '#FF66A3',
-                        'retro-yellow': '#FDE047',
-                        'retro-green': '#86EFAC',
-                        'retro-blue': '#93C5FD',
-                    },
-                    boxShadow: {
-                        'brutal': '4px 4px 0px 0px rgba(0,0,0,1)',
-                        'brutal-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
-                        'brutal-hover': '1px 1px 0px 0px rgba(0,0,0,1)',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-cream: #FDFBF7;
+            --bau-blue: #185EE0;
+            --bau-orange: #F24E1E;
+            --bau-yellow: #FDE047;
+            --bau-pink: #FFB8D2;
+            --bau-green: #34A853;
+            --bau-black: #000000;
+            --bau-white: #FFFFFF;
+        }
+
         body {
-            background-color: #FAFAFA;
-            color: #000;
-            background-image: radial-gradient(#ddd 1px, transparent 1px);
-            background-size: 20px 20px;
+            font-family: 'Space Mono', monospace;
+            background-color: var(--bg-cream);
+            color: var(--bau-black);
+            font-size: 13px;
         }
-        .brutal-border {
-            border: 3px solid #000;
+
+        /* Bauhaus anti-rounded corners */
+        * {
+            border-radius: 0 !important;
         }
-        .heading-pink-underline {
-            color: #FF66A3;
-            text-decoration: underline;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 6px;
-            text-shadow: 1px 1px 0px #000;
+
+        /* Custom scrollbar style */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-cream);
+            border-left: 2px solid var(--bau-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bau-black);
+            border: 2px solid var(--bg-cream);
+        }
+
+        /* Solid Box Shadows */
+        .bau-shadow-sm {
+            box-shadow: 2px 2px 0px var(--bau-black);
+        }
+        .bau-shadow-md {
+            box-shadow: 4px 4px 0px var(--bau-black);
+        }
+        .bau-shadow-lg {
+            box-shadow: 8px 8px 0px var(--bau-black);
+        }
+
+        /* Active State Animations */
+        .bau-btn-active:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px var(--bau-black) !important;
+        }
+
+        .tab-btn.active {
+            background-color: var(--bau-black);
+            color: var(--bau-yellow);
         }
     </style>
 </head>
-<body class="p-4 md:p-6 font-sans min-h-screen">
+<body class="p-3 md:p-6 min-h-screen">
 
-    <div class="max-w-6xl mx-auto space-y-6">
-
-        <!-- HEADER (Tombol Cetak Sudah Dihapus) -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 brutal-border p-4 shadow-brutal bg-white">
-            <div class="flex items-center gap-4">
-                <!-- Logo YouTube Retro -->
-                <div class="w-14 h-10 bg-red-600 brutal-border flex items-center justify-center text-white text-xl shadow-brutal-sm relative">
-                    <i class="fa-brands fa-youtube"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-retro-pink" style="text-shadow: 1px 1px 0px #000;">Kalender AdSense</h1>
-                    <p class="font-mono text-xs font-bold uppercase bg-black text-white px-2 inline-block">Estimator Pencairan BRI</p>
-                </div>
+    <header class="max-w-6xl mx-auto mb-6 border-4 border-black bg-white p-4 md:p-6 bau-shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-16 h-16 bg-[#F24E1E] border-2 border-black flex items-center justify-center relative overflow-hidden shrink-0">
+                <div class="absolute -bottom-2 -left-2 w-8 h-8 bg-[#185EE0] border-t-2 border-r-2 border-black rotate-45"></div>
+                <i class="bi bi-layers-fill text-3xl text-white z-10"></i>
             </div>
-            
-            <!-- JAM & TANGGAL REALTIME -->
-            <div class="flex flex-col md:items-end w-full md:w-auto mt-2 md:mt-0 pt-3 md:pt-0 border-t-2 border-dashed border-gray-300 md:border-none">
-                <div class="font-mono text-lg md:text-xl font-bold tracking-tighter" id="liveTime">00:00:00 WIB</div>
-                <div class="font-mono text-[10px] md:text-xs font-bold uppercase bg-retro-yellow px-2 py-0.5 brutal-border shadow-brutal-hover" id="liveDate">MEMUAT...</div>
-            </div>
-        </header>
-
-        <!-- KONTROL BULAN -->
-        <div class="space-y-2">
-            <div class="flex flex-wrap gap-2 font-mono text-xs md:text-sm font-bold" id="monthTabs">
-                <!-- Tabs generated by JS -->
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight text-underline-bau">LS MANAGER & SIMULATOR</h1>
+                <p class="text-xs text-gray-600 mt-1 uppercase">Sistem Manajemen & Simulasi Pembersihan Penyimpanan Lokal</p>
             </div>
         </div>
+        
+        <div class="flex flex-wrap gap-2 w-full md:w-auto">
+            <button onclick="switchTab('real')" id="tabReal" class="tab-btn active px-4 py-2 border-2 border-black font-bold text-xs uppercase tracking-wider transition-all bau-shadow-sm bau-btn-active">
+                <i class="bi bi-hdd-network-fill mr-1"></i> Penyimpanan Riil
+            </button>
+            <button onclick="switchTab('sim')" id="tabSim" class="tab-btn px-4 py-2 border-2 border-black font-bold text-xs uppercase tracking-wider transition-all bg-white hover:bg-gray-100 bau-shadow-sm bau-btn-active">
+                <i class="bi bi-shield-slash-fill mr-1"></i> Sandbox Simulasi
+            </button>
+        </div>
+    </header>
 
-        <!-- MAIN LAYOUT: KALENDER (KIRI) & LEGENDA (KANAN) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <section class="lg:col-span-4 flex flex-col gap-6">
             
-            <!-- KOLOM KIRI: KALENDER -->
-            <div class="lg:col-span-2 space-y-4">
-                
-                <!-- KALENDER GRID -->
-                <div class="brutal-border bg-white shadow-brutal p-4">
-                    <div class="flex justify-between items-center mb-4 border-b-3 border-black pb-3">
-                        <button id="prevMonth" class="w-8 h-8 brutal-border bg-white flex items-center justify-center hover:bg-gray-200 transition-colors shadow-brutal-sm active:translate-y-1 active:shadow-none">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <h3 class="text-xl md:text-2xl font-bold uppercase tracking-widest" id="calendarTitle">Memuat...</h3>
-                        <button id="nextMonth" class="w-8 h-8 brutal-border bg-white flex items-center justify-center hover:bg-gray-200 transition-colors shadow-brutal-sm active:translate-y-1 active:shadow-none">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <!-- Nama Hari -->
-                    <div class="grid grid-cols-7 gap-1 md:gap-2 mb-2 text-center font-mono font-bold text-xs md:text-sm uppercase">
-                        <div class="text-red-500 bg-red-100 brutal-border py-1">Min</div>
-                        <div class="bg-gray-100 brutal-border py-1">Sen</div>
-                        <div class="bg-gray-100 brutal-border py-1">Sel</div>
-                        <div class="bg-gray-100 brutal-border py-1">Rab</div>
-                        <div class="bg-gray-100 brutal-border py-1">Kam</div>
-                        <div class="bg-gray-100 brutal-border py-1">Jum</div>
-                        <div class="text-red-500 bg-red-100 brutal-border py-1">Sab</div>
-                    </div>
-
-                    <!-- Grid Tanggal -->
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 md:gap-2">
-                        <!-- Dates generated by JS -->
-                    </div>
+            <!-- Panel Aksi Cepat / Tambah Data -->
+            <div class="border-4 border-black bg-white p-4 bau-shadow-md">
+                <div class="bg-[#185EE0] text-white p-2 border-b-2 border-black font-bold text-xs uppercase tracking-wider mb-4 flex justify-between items-center">
+                    <span><i class="bi bi-plus-square-fill mr-2"></i> Tambah Key-Value Baru</span>
+                    <span class="bg-black text-[#FDE047] px-2 py-0.5 text-[10px] uppercase">Input</span>
                 </div>
-
-            </div>
-
-            <!-- KOLOM KANAN: LEGENDA -->
-            <div class="space-y-4">
-                <h2 class="heading-pink-underline font-mono text-base font-bold uppercase inline-block bg-white px-1 brutal-border shadow-brutal-sm">Keterangan Status:</h2>
                 
-                <div class="space-y-4 brutal-border bg-white shadow-brutal p-4">
+                <form id="addStorageForm" onsubmit="handleAddNewItem(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase mb-1">Kunci (Key)</label>
+                        <input type="text" id="inputKey" required placeholder="Contoh: user_session_token" class="w-full p-2 border-2 border-black bg-[#FDFBF7] font-mono focus:bg-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase mb-1">Nilai (Value)</label>
+                        <textarea id="inputValue" required rows="3" placeholder="Contoh: eyJhbGciOiJIUzI1NiIsIn..." class="w-full p-2 border-2 border-black bg-[#FDFBF7] font-mono focus:bg-white focus:outline-none text-xs"></textarea>
+                    </div>
                     
-                    <!-- Kuning -->
-                    <div class="flex gap-3 items-start border-b-2 border-dashed border-gray-300 pb-3">
-                        <div class="w-10 h-10 shrink-0 bg-retro-yellow brutal-border shadow-brutal-sm flex justify-center items-center text-lg">
-                            <i class="fa-solid fa-arrow-trend-up"></i>
-                        </div>
-                        <div class="font-sans text-xs">
-                            <strong class="block mb-1 text-sm uppercase text-black bg-retro-yellow inline-block px-1 brutal-border">Saldo Masuk AdSense</strong>
-                            <strong class="block mb-1 mt-1 text-xs uppercase text-gray-500">TGL 7-12</strong>
-                            <p>Penghasilan difinalisasi dan diposting ke AdSense untuk YouTube.</p>
-                        </div>
-                    </div>
+                    <button type="submit" class="w-full py-2.5 bg-[#F24E1E] text-white font-bold uppercase border-2 border-black bau-shadow-sm bau-btn-active tracking-wider text-xs">
+                        <i class="bi bi-save2-fill mr-1"></i> Simpan Data Baru
+                    </button>
+                </form>
+            </div>
 
-                    <!-- Hijau -->
-                    <div class="flex gap-3 items-start border-b-2 border-dashed border-gray-300 pb-3">
-                        <div class="w-10 h-10 shrink-0 bg-retro-green brutal-border shadow-brutal-sm flex justify-center items-center text-lg">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                        <div class="font-sans text-xs">
-                            <strong class="block mb-1 text-sm uppercase text-black bg-retro-green inline-block px-1 brutal-border">Saldo Divalidasi</strong>
-                            <strong class="block mb-1 mt-1 text-xs uppercase text-gray-500">TGL 20</strong>
-                            <p>Saldo total harus mencapai nilai minimum pembayaran dan semua perubahan info harus diselesaikan.</p>
-                        </div>
-                    </div>
+            <!-- Panel Bantuan & Informasi Bauhaus -->
+            <div class="border-4 border-black bg-[#FFB8D2] p-4 bau-shadow-md">
+                <div class="bg-black text-white p-2 font-bold text-xs uppercase tracking-wider mb-3">
+                    <i class="bi bi-info-circle-fill mr-2"></i> Apa ini?
+                </div>
+                <p class="text-xs leading-relaxed text-black font-bold">
+                    Situs web tidak dapat menghapus local storage milik situs lain secara langsung karena dibatasi protokol keamanan Web API. 
+                </p>
+                <div class="my-3 border-t-2 border-black"></div>
+                <p class="text-[11px] leading-relaxed text-black">
+                    Gunakan tab <span class="bg-[#FDE047] px-1 text-black font-bold">Penyimpanan Riil</span> untuk mengelola data nyata halaman ini, atau beralihlah ke tab <span class="bg-[#185EE0] px-1 text-white font-bold">Sandbox Simulasi</span> untuk melihat simulasi ekstensi melintasi domain yang berbeda secara virtual!
+                </p>
+            </div>
 
-                    <!-- Biru -->
-                    <div class="flex gap-3 items-start pb-1">
-                        <div class="w-10 h-10 shrink-0 bg-retro-blue brutal-border shadow-brutal-sm flex justify-center items-center text-lg">
-                            <i class="fa-solid fa-arrows-rotate"></i>
-                        </div>
-                        <div class="font-sans text-xs">
-                            <strong class="block mb-1 text-sm uppercase text-black bg-retro-blue inline-block px-1 brutal-border">Saldo Dikirim</strong>
-                            <strong class="block mb-1 mt-1 text-xs uppercase text-gray-500">TGL 21-26</strong>
-                            <p>Pembayaran dikirim ("Pembayaran dalam proses"). Jika 21 libur, dikirim di hari kerja berikutnya.</p>
-                        </div>
-                    </div>
+        </section>
 
+        <section class="lg:col-span-8 flex flex-col gap-6">
+            
+            <!-- Dashboard Riil (Tab Real Storage) -->
+            <div id="panelRealContainer" class="border-4 border-black bg-white p-4 bau-shadow-md flex flex-col min-h-[480px]">
+                
+                <!-- Baris Menu Operasional Atas -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-4 pb-4 border-b-2 border-black">
+                    <div>
+                        <h2 class="text-base font-bold uppercase tracking-tight flex items-center">
+                            <span class="w-3 h-3 bg-[#34A853] inline-block mr-2 border border-black"></span>
+                            Local Storage Nyata (Origin Aktif)
+                        </h2>
+                        <span class="text-[10px] text-gray-500 font-mono" id="realOriginText">Memuat asal domain...</span>
+                    </div>
+                    
+                    <!-- Aksi Batch -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button onclick="generateMockData()" class="px-3 py-1.5 bg-[#FDE047] text-black border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">
+                            <i class="bi bi-magic mr-1"></i> Data Uji Coba
+                        </button>
+                        <button onclick="promptClearAll('real')" class="px-3 py-1.5 bg-black text-white border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">
+                            <i class="bi bi-trash-fill mr-1"></i> Kosongkan
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Info Box Khusus "Cair BRI" -->
-                <div class="brutal-border bg-black text-white p-3 shadow-brutal text-xs font-mono mt-4 flex gap-3 items-center">
-                    <div class="w-8 h-8 bg-black border-2 border-retro-pink text-white flex justify-center items-center shrink-0">
-                        <span class="text-[8px]">CAIR</span>
+                <!-- Penyaringan Kunci -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-2 mb-4">
+                    <div class="md:col-span-8 relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-search text-gray-500"></i>
+                        </span>
+                        <input type="text" id="realSearchInput" oninput="renderRealStorageTable()" placeholder="Cari berdasarkan Nama Kunci (Key) atau Nilai (Value)..." class="w-full pl-9 pr-3 py-2 border-2 border-black bg-[#FDFBF7] font-mono text-xs focus:bg-white focus:outline-none">
                     </div>
-                    <p class="text-gray-300">
-                        Kotak hitam dengan border <span class="text-retro-pink font-bold">Pink</span> menunjukkan estimasi dana masuk ke rekening <strong class="text-white">Bank BRI</strong> Anda.
-                    </p>
+                    <button onclick="deleteSelected('real')" class="md:col-span-4 py-2 bg-[#F24E1E] text-white border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">
+                        <i class="bi bi-dash-circle-fill mr-1"></i> Hapus Terpilih (<span id="realSelectCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- Wadah Tabel Data Real Storage -->
+                <div class="flex-grow overflow-x-auto border-2 border-black">
+                    <table class="w-full text-left border-collapse font-mono text-xs">
+                        <thead>
+                            <tr class="bg-black text-white uppercase font-bold text-[11px] border-b-2 border-black">
+                                <th class="p-3 w-10 text-center">
+                                    <input type="checkbox" id="realMasterCheckbox" onchange="toggleSelectAll('real')" class="w-4 h-4 border-2 border-black cursor-pointer accent-[#FDE047]">
+                                </th>
+                                <th class="p-3 border-r border-gray-700 w-1/3">Kunci (Key)</th>
+                                <th class="p-3 border-r border-gray-700">Nilai (Value)</th>
+                                <th class="p-3 w-16 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="realStorageTableBody">
+                            <!-- Diisi secara dinamis oleh JavaScript -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
+            <!-- Dashboard Simulasi (Tab Simulated Multi-Domain Storage) -->
+            <div id="panelSimContainer" class="hidden border-4 border-black bg-white p-4 bau-shadow-md flex flex-col min-h-[480px]">
+                
+                <!-- Baris Menu Operasional Atas -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-4 pb-4 border-b-2 border-black">
+                    <div>
+                        <h2 class="text-base font-bold uppercase tracking-tight flex items-center">
+                            <span class="w-3 h-3 bg-[#185EE0] inline-block mr-2 border border-black"></span>
+                            Simulator Sandbox Lintas Domain
+                        </h2>
+                        <span class="text-[10px] text-gray-500 font-bold uppercase">Simulasi Kontrol Ekstensi Browser</span>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button onclick="resetSimulatedSandbox()" class="px-3 py-1.5 bg-[#FFB8D2] text-black border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">
+                            <i class="bi bi-arrow-counterclockwise mr-1"></i> Reset Sandbox
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pilihan Sandbox Domain Virtual -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-4 bg-[#FDE047] p-3 border-2 border-black">
+                    <div class="md:col-span-4 flex items-center gap-2">
+                        <label class="text-xs font-bold uppercase whitespace-nowrap"><i class="bi bi-globe mr-1"></i> Pilih Domain:</label>
+                    </div>
+                    <div class="md:col-span-8 flex gap-2">
+                        <select id="simDomainSelector" onchange="handleDomainChange()" class="w-full p-2 border-2 border-black bg-white font-mono text-xs focus:outline-none font-bold">
+                            <!-- Diisi oleh JS -->
+                        </select>
+                        <button onclick="promptAddNewDomain()" class="px-3 py-1 bg-black text-white border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active whitespace-nowrap">
+                            <i class="bi bi-plus-lg"></i> Domain Baru
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Penyaringan Kunci Simulasi -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-2 mb-4">
+                    <div class="md:col-span-8 relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-search text-gray-500"></i>
+                        </span>
+                        <input type="text" id="simSearchInput" oninput="renderSimulatedStorageTable()" placeholder="Cari data sim..." class="w-full pl-9 pr-3 py-2 border-2 border-black bg-[#FDFBF7] font-mono text-xs focus:bg-white focus:outline-none">
+                    </div>
+                    <button onclick="deleteSelected('sim')" class="md:col-span-4 py-2 bg-[#F24E1E] text-white border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">
+                        <i class="bi bi-dash-circle-fill mr-1"></i> Hapus Terpilih (<span id="simSelectCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- Wadah Tabel Data Sandbox Storage -->
+                <div class="flex-grow overflow-x-auto border-2 border-black">
+                    <table class="w-full text-left border-collapse font-mono text-xs">
+                        <thead>
+                            <tr class="bg-black text-white uppercase font-bold text-[11px] border-b-2 border-black">
+                                <th class="p-3 w-10 text-center">
+                                    <input type="checkbox" id="simMasterCheckbox" onchange="toggleSelectAll('sim')" class="w-4 h-4 border-2 border-black cursor-pointer accent-[#FDE047]">
+                                </th>
+                                <th class="p-3 border-r border-gray-700 w-1/3">Kunci (Key)</th>
+                                <th class="p-3 border-r border-gray-700">Nilai (Value)</th>
+                                <th class="p-3 w-16 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="simStorageTableBody">
+                            <!-- Diisi secara dinamis oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    
+    <!-- Dialog Konfirmasi Kustom -->
+    <div id="customConfirmModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 font-mono">
+        <div class="w-full max-w-md bg-[#FDFBF7] border-4 border-black bau-shadow-lg overflow-hidden">
+            <div class="bg-[#F24E1E] text-white p-3 border-b-2 border-black font-bold text-xs uppercase flex justify-between items-center">
+                <span><i class="bi bi-exclamation-triangle-fill mr-2"></i> Konfirmasi Tindakan</span>
+                <button onclick="closeConfirmModal(false)" class="text-white hover:text-black font-bold text-base">&times;</button>
+            </div>
+            <div class="p-4 text-xs font-bold leading-relaxed text-black" id="confirmModalBody">
+                Apakah Anda benar-benar yakin ingin memproses tindakan ini?
+            </div>
+            <div class="p-3 bg-white border-t-2 border-black flex justify-end gap-2">
+                <button onclick="closeConfirmModal(false)" class="px-4 py-2 border-2 border-black font-bold text-xs uppercase hover:bg-gray-100 bau-shadow-sm bau-btn-active">Batal</button>
+                <button onclick="closeConfirmModal(true)" class="px-4 py-2 bg-black text-[#FDE047] border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active" id="confirmModalConfirmBtn">Ya, Proses</button>
+            </div>
         </div>
     </div>
 
+    <!-- Dialog Input Domain Baru Kustom -->
+    <div id="customPromptModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 font-mono">
+        <div class="w-full max-w-sm bg-[#FDFBF7] border-4 border-black bau-shadow-lg overflow-hidden">
+            <div class="bg-[#185EE0] text-white p-3 border-b-2 border-black font-bold text-xs uppercase">
+                <i class="bi bi-plus-circle-fill mr-2"></i> Tambah Domain Baru
+            </div>
+            <div class="p-4 space-y-3">
+                <label class="block text-xs font-bold uppercase">Nama Domain Hostname</label>
+                <input type="text" id="promptModalInput" placeholder="Contoh: tokpedia.com" class="w-full p-2 border-2 border-black bg-white font-mono text-xs focus:outline-none">
+                <p class="text-[10px] text-gray-500 font-sans uppercase">Hanya karakter nama situs web dan ekstensi domain.</p>
+            </div>
+            <div class="p-3 bg-white border-t-2 border-black flex justify-end gap-2">
+                <button onclick="closePromptModal(false)" class="px-4 py-2 border-2 border-black font-bold text-xs uppercase hover:bg-gray-100 bau-shadow-sm bau-btn-active">Batal</button>
+                <button onclick="closePromptModal(true)" class="px-4 py-2 bg-black text-white border-2 border-black font-bold text-xs uppercase bau-shadow-sm bau-btn-active">Tambah</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Banner Dialog Notifikasi -->
+    <div id="toastNotification" class="hidden fixed bottom-6 left-6 z-50 px-4 py-3 bg-[#34A853] text-white border-2 border-black bau-shadow-md font-mono text-xs font-bold uppercase flex items-center gap-3">
+        <i class="bi bi-check-circle-fill text-lg text-white"></i>
+        <span id="toastMessage">Tindakan berhasil diselesaikan!</span>
+    </div>
+
     <script>
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
-        const fullMonthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        const dayNamesIndo = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        // Tab aktif state
+        let activeTab = 'real';
         
-        let currentDate = new Date(); 
-        let displayedYear = currentDate.getFullYear();
-        let displayedMonth = currentDate.getMonth();
+        // Sandbox multi-domain simulated database
+        let simulatedDatabase = {
+            'youtube.com': {
+                'yt-remote-device-id': '{"data":"f6ae5891-b3b3-4f9e-a89c-43f295b28d00","expiration":1801824000000}',
+                'PREF': 'f1=50000000&tz=Asia.Jakarta',
+                'VISITOR_INFO1_LIVE': 'zX9wP32qM-8',
+                'yt_tracker_backup_v1': '{"channel":"My Vlog","balance":3400.5}'
+            },
+            'shopee.co.id': {
+                'SPC_EC': 'T0RreXJ4U2N4SDF2bHphcQ==',
+                'shopee_user_session': '8b3ad4f9-2c00-4b2a-89aa-cfb95e090f42',
+                'cart_items_count': '12',
+                'search_history_cache': '["baju bauhaus", "space mono poster", "vintage retro"]'
+            },
+            'github.com': {
+                'dotcom_user': 'bauhaus_dev_2026',
+                'logged_in': 'yes',
+                'tz': 'Asia/Jakarta',
+                'dashboard_layout_pref': 'column-compact'
+            }
+        };
+        let currentSimulatedDomain = 'youtube.com';
 
-        // Elemen DOM Jam Realtime
-        const liveTimeEl = document.getElementById('liveTime');
-        const liveDateEl = document.getElementById('liveDate');
+        // Modal callbacks & handlers
+        let currentConfirmCallback = null;
+        let currentPromptCallback = null;
 
-        // Fungsi Update Jam
-        function updateClock() {
-            const now = new Date();
+        // Inisialisasi awal saat dokumen siap
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tampilkan asal domain aktif
+            const realOrigin = window.location.hostname || "Local File / Iframe Preview Sandbox";
+            document.getElementById('realOriginText').innerText = `DOMAIN: ${realOrigin.toUpperCase()}`;
             
-            // Format Jam (HH:MM:SS)
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            liveTimeEl.textContent = `${hours}:${minutes}:${seconds} WIB`;
+            // Siapkan drop-down simulator
+            populateSimulatedDomains();
             
-            // Format Tanggal
-            const dayName = dayNamesIndo[now.getDay()];
-            const date = String(now.getDate()).padStart(2, '0');
-            const monthName = fullMonthNames[now.getMonth()];
-            const year = now.getFullYear();
-            liveDateEl.textContent = `${dayName}, ${date} ${monthName.toUpperCase()} ${year}`;
+            // Muat dan render data
+            renderRealStorageTable();
+            renderSimulatedStorageTable();
+            
+            // Daftarkan listener sinkronisasi perubahan local storage eksternal
+            window.addEventListener('storage', () => {
+                if (activeTab === 'real') {
+                    renderRealStorageTable();
+                }
+            });
+        });
+
+        // Beralih Tab Operasi (Real vs Simulated Sandbox)
+        function switchTab(tab) {
+            activeTab = tab;
+            
+            // Ganti Style Tab
+            document.getElementById('tabReal').className = `tab-btn px-4 py-2 border-2 border-black font-bold text-xs uppercase tracking-wider transition-all bau-shadow-sm bau-btn-active ${tab === 'real' ? 'active' : 'bg-white hover:bg-gray-100'}`;
+            document.getElementById('tabSim').className = `tab-btn px-4 py-2 border-2 border-black font-bold text-xs uppercase tracking-wider transition-all bau-shadow-sm bau-btn-active ${tab === 'sim' ? 'active' : 'bg-white hover:bg-gray-100'}`;
+            
+            // Ganti Tampilan Wadah Kontainer
+            if (tab === 'real') {
+                document.getElementById('panelRealContainer').classList.remove('hidden');
+                document.getElementById('panelSimContainer').classList.add('hidden');
+                renderRealStorageTable();
+            } else {
+                document.getElementById('panelRealContainer').classList.add('hidden');
+                document.getElementById('panelSimContainer').classList.remove('hidden');
+                renderSimulatedStorageTable();
+            }
         }
-        
-        // Jalankan Jam
-        setInterval(updateClock, 1000);
-        updateClock();
 
-        // Elemen DOM Kalender
-        const calendarGrid = document.getElementById('calendarGrid');
-        const calendarTitle = document.getElementById('calendarTitle');
-        const monthTabs = document.getElementById('monthTabs');
+        // ==================== REAL LOCAL STORAGE ENGINE ====================
 
-        let holidaysData = {};
-        let holidayFetchStatus = {};
-
-        // Fungsi Fetch API Libur Asinkron (API Kresna Satya)
-        async function fetchHolidaysAPI(year) {
-            if (holidayFetchStatus[year]) return; 
-            holidayFetchStatus[year] = true;
-
-            try {
-                // Fetch ke Endpoint
-                const response = await fetch(`https://api-harilibur.vercel.app/api?year=${year}`);
+        // Merender isi data tabel asli window.localStorage
+        function renderRealStorageTable() {
+            const tbody = document.getElementById('realStorageTableBody');
+            tbody.innerHTML = '';
+            
+            const searchQuery = document.getElementById('realSearchInput').value.toLowerCase();
+            const keys = Object.keys(localStorage);
+            let displayedCount = 0;
+            
+            // Bersihkan status checkbox master
+            document.getElementById('realMasterCheckbox').checked = false;
+            
+            keys.forEach(key => {
+                const value = localStorage.getItem(key) || '';
                 
-                // Cek apakah response adalah JSON (mencegah error parse HTML dari server)
-                const contentType = response.headers.get("content-type");
-                if (!response.ok || (contentType && !contentType.includes("application/json"))) {
-                     throw new Error("Gagal mengambil data atau response bukan JSON");
+                // Pencarian Filter
+                if (searchQuery && !key.toLowerCase().includes(searchQuery) && !value.toLowerCase().includes(searchQuery)) {
+                    return;
                 }
-
-                const result = await response.json();
                 
-                // Masukkan data ke memori lokal
-                if (result && result.data) {
-                    result.data.forEach(holiday => {
-                        holidaysData[holiday.date] = holiday.description;
-                    });
-                }
-            } catch (error) {
-                // Mencoba Proxy jika API Utama kena CORS atau Error Halaman
-                try {
-                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://api-harilibur.vercel.app/api?year=' + year)}`;
-                    const proxyResponse = await fetch(proxyUrl);
-                    const proxyResult = await proxyResponse.json();
-                    
-                    // Pastikan konten dari proxy adalah JSON murni (dimulai dengan '{')
-                    // Ini mencegah error "Unexpected token '<'" jika API mengembalikan HTML
-                    if (proxyResult.contents && proxyResult.contents.trim().startsWith('{')) {
-                        const actualData = JSON.parse(proxyResult.contents);
-                        
-                        if (actualData && actualData.data) {
-                            actualData.data.forEach(holiday => {
-                                holidaysData[holiday.date] = holiday.description;
-                            });
-                        }
-                    } else {
-                        throw new Error("Data dari proxy berupa HTML, bukan JSON.");
-                    }
-                } catch (proxyError) {
-                    // Menggunakan data fallback lokal diam-diam tanpa memunculkan error mencolok di console
-                    if(year === 2026) {
-                        const fallback2026 = [
-                            {"date":"2026-01-01","description":"Tahun Baru 2026 Masehi"},{"date":"2026-01-16","description":"Isra Mi’raj Nabi Muhammad SAW"},{"date":"2026-02-17","description":"Tahun Baru Imlek 2577 Kongzili"},{"date":"2026-03-18","description":"Cuti Bersama Hari Suci Nyepi Tahun Baru Saka 1948"},{"date":"2026-03-19","description":"Hari Suci Nyepi Tahun Baru Saka 1948"},{"date":"2026-03-20","description":"Cuti Bersama Hari Raya Idul Fitri 1447 Hijriyah"},{"date":"2026-03-21","description":"Hari Raya Idul Fitri 1447 Hijriyah"},{"date":"2026-03-22","description":"Hari Raya Idul Fitri 1447 Hijriyah"},{"date":"2026-03-23","description":"Cuti Bersama Hari Raya Idul Fitri 1447 Hijriyah"},{"date":"2026-03-24","description":"Cuti Bersama Hari Raya Idul Fitri 1447 Hijriyah"},{"date":"2026-04-03","description":"Wafat Yesus Kristus / Jumat Agung"},{"date":"2026-04-05","description":"Kebangkitan Yesus Kristus (Paskah)"},{"date":"2026-05-01","description":"Hari Buruh Internasional"},{"date":"2026-05-14","description":"Kenaikan Yesus Kristus"},{"date":"2026-05-15","description":"Cuti Bersama Kenaikan Yesus Kristus"},{"date":"2026-05-27","description":"Hari Raya Idul Adha 1447 Hijriyah"},{"date":"2026-05-28","description":"Cuti Bersama Hari Raya Idul Adha 1447 Hijriyah"},{"date":"2026-05-31","description":"Hari Raya Waisak 2570 BE"},{"date":"2026-06-01","description":"Hari Lahir Pancasila"},{"date":"2026-06-16","description":"Tahun Baru Islam 1448 Hijriyah"},{"date":"2026-08-17","description":"Hari Kemerdekaan Republik Indonesia"},{"date":"2026-08-25","description":"Maulid Nabi Muhammad SAW"},{"date":"2026-12-24","description":"Cuti Bersama Hari Raya Natal"},{"date":"2026-12-25","description":"Hari Raya Natal"}
-                        ];
-                        fallback2026.forEach(holiday => { holidaysData[holiday.date] = holiday.description; });
-                    } else {
-                        holidayFetchStatus[year] = false; 
-                    }
-                }
+                displayedCount++;
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-black hover:bg-yellow-50 hover:bg-opacity-40 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 text-center border-r border-black bg-[#FDFBF7]">
+                        <input type="checkbox" class="real-row-checkbox w-4 h-4 border-2 border-black cursor-pointer accent-black" data-key="${encodeURIComponent(key)}" onchange="updateSelectedCount('real')">
+                    </td>
+                    <td class="p-3 border-r border-black font-bold text-blue-800 break-all">${escapeHTML(key)}</td>
+                    <td class="p-3 border-r border-black break-all text-gray-700">
+                        <div class="max-h-20 overflow-y-auto pr-1 select-all font-mono whitespace-pre-wrap">${escapeHTML(value)}</div>
+                    </td>
+                    <td class="p-3 text-center bg-[#FDFBF7]">
+                        <button onclick="deleteOneItem('real', '${escapeJS(key)}')" class="p-1 px-2 bg-[#F24E1E] text-white border border-black font-bold text-[10px] uppercase tracking-wider hover:bg-red-700 transition-colors">
+                            Hapus
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            if (displayedCount === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-gray-500 uppercase bg-[#FDFBF7]">
+                            <i class="bi bi-box-sealer text-2xl block mb-2 text-black"></i>
+                            [ Local storage riil kosong atau tidak cocok ]
+                        </td>
+                    </tr>
+                `;
             }
+            updateSelectedCount('real');
         }
 
-        // Fungsi Cek Hari Kerja (Akhir pekan & Libur Nasional)
-        function isWorkingDay(dateObj) {
-            const day = dateObj.getDay();
-            if (day === 0 || day === 6) return false; // Minggu & Sabtu
+        // Membuat data mock instan untuk demonstrasi local storage riil
+        function generateMockData() {
+            localStorage.setItem('yt_studio_user_session', 'session_auth_abc123456789_active');
+            localStorage.setItem('yt_studio_theme_preference', 'bauhaus-high-contrast-dark');
+            localStorage.setItem('yt_studio_tax_cache_idr', '1500000');
+            localStorage.setItem('yt_studio_cached_kurs', '15850');
+            localStorage.setItem('yt_studio_auto_sync', 'true');
             
-            const year = dateObj.getFullYear();
-            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-            const dateStr = String(dateObj.getDate()).padStart(2, '0');
-            const fullDate = `${year}-${month}-${dateStr}`;
-            
-            if (holidaysData[fullDate]) return false; // Deteksi Hari Libur
-            
-            return true;
+            showToast("Sukses membuat 5 data uji coba!");
+            renderRealStorageTable();
         }
 
-        // Algoritma Utama BRI
-        function calculateBRIPaymentDate(year, month) {
-            let paymentDate = new Date(year, month, 21);
-            let adSenseSendDate = new Date(paymentDate);
-            while (!isWorkingDay(adSenseSendDate)) {
-                adSenseSendDate.setDate(adSenseSendDate.getDate() + 1);
-            }
+        // ==================== SIMULATION SANDBOX ENGINE ====================
 
-            let briArrivalDate = new Date(adSenseSendDate);
-            briArrivalDate.setDate(briArrivalDate.getDate() + 1);
-            while (!isWorkingDay(briArrivalDate)) {
-                briArrivalDate.setDate(briArrivalDate.getDate() + 1);
-            }
+        // Mengisi pilihan domain simulasi ke dropdown selector
+        function populateSimulatedDomains() {
+            const selector = document.getElementById('simDomainSelector');
+            selector.innerHTML = '';
+            
+            const domains = Object.keys(simulatedDatabase);
+            domains.forEach(dom => {
+                const opt = document.createElement('option');
+                opt.value = dom;
+                opt.innerText = dom.toUpperCase();
+                if (dom === currentSimulatedDomain) opt.selected = true;
+                selector.appendChild(opt);
+            });
+        }
 
-            return {
-                baseDate: paymentDate,
-                sendDate: adSenseSendDate,
-                arrivalDate: briArrivalDate
+        function handleDomainChange() {
+            currentSimulatedDomain = document.getElementById('simDomainSelector').value;
+            renderSimulatedStorageTable();
+        }
+
+        // Merender tabel visual data virtual multi-domain sandbox
+        function renderSimulatedStorageTable() {
+            const tbody = document.getElementById('simStorageTableBody');
+            tbody.innerHTML = '';
+            
+            const searchQuery = document.getElementById('simSearchInput').value.toLowerCase();
+            const storageObj = simulatedDatabase[currentSimulatedDomain] || {};
+            const keys = Object.keys(storageObj);
+            let displayedCount = 0;
+            
+            // Reset Master Checkbox
+            document.getElementById('simMasterCheckbox').checked = false;
+            
+            keys.forEach(key => {
+                const value = storageObj[key] || '';
+                
+                // Pencarian Filter
+                if (searchQuery && !key.toLowerCase().includes(searchQuery) && !value.toLowerCase().includes(searchQuery)) {
+                    return;
+                }
+                
+                displayedCount++;
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-black hover:bg-blue-50 hover:bg-opacity-40 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 text-center border-r border-black bg-[#FDFBF7]">
+                        <input type="checkbox" class="sim-row-checkbox w-4 h-4 border-2 border-black cursor-pointer accent-black" data-key="${encodeURIComponent(key)}" onchange="updateSelectedCount('sim')">
+                    </td>
+                    <td class="p-3 border-r border-black font-bold text-blue-800 break-all">${escapeHTML(key)}</td>
+                    <td class="p-3 border-r border-black break-all text-gray-700">
+                        <div class="max-h-20 overflow-y-auto pr-1 select-all font-mono whitespace-pre-wrap">${escapeHTML(value)}</div>
+                    </td>
+                    <td class="p-3 text-center bg-[#FDFBF7]">
+                        <button onclick="deleteOneItem('sim', '${escapeJS(key)}')" class="p-1 px-2 bg-[#F24E1E] text-white border border-black font-bold text-[10px] uppercase tracking-wider hover:bg-red-700 transition-colors">
+                            Hapus
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            if (displayedCount === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-gray-500 uppercase bg-[#FDFBF7]">
+                            <i class="bi bi-shield-alert text-2xl block mb-2 text-black"></i>
+                            [ Sandbox simulasi domain ini kosong ]
+                        </td>
+                    </tr>
+                `;
+            }
+            updateSelectedCount('sim');
+        }
+
+        // Menambahkan domain simulasi baru secara dinamis
+        function promptAddNewDomain() {
+            document.getElementById('promptModalInput').value = '';
+            document.getElementById('customPromptModal').classList.remove('hidden');
+            
+            currentPromptCallback = (success, value) => {
+                if (success && value) {
+                    let cleanedDomain = value.toLowerCase().replace(/[^a-z0-9.-]/g, '');
+                    if (!cleanedDomain) {
+                        showToast("Format domain salah!");
+                        return;
+                    }
+                    if (!simulatedDatabase[cleanedDomain]) {
+                        // Inisialisasi domain dengan data dummy pembuka
+                        simulatedDatabase[cleanedDomain] = {
+                            'created_at': new Date().toISOString(),
+                            'sandbox_status': 'active'
+                        };
+                    }
+                    currentSimulatedDomain = cleanedDomain;
+                    populateSimulatedDomains();
+                    renderSimulatedStorageTable();
+                    showToast(`Situs virtual ${cleanedDomain.toUpperCase()} terdaftar!`);
+                }
             };
         }
 
-        function generateTabs() {
-            monthTabs.innerHTML = '';
-            for(let i = -2; i <= 2; i++) {
-                let d = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
-                let isCurrent = (d.getMonth() === displayedMonth && d.getFullYear() === displayedYear);
-                
-                let btnClass = isCurrent 
-                    ? "bg-black text-white brutal-border py-1 px-3 shadow-brutal-sm translate-y-[-2px]" 
-                    : "bg-white text-black brutal-border py-1 px-3 hover:bg-gray-100 cursor-pointer shadow-brutal-sm";
+        function closePromptModal(accepted) {
+            document.getElementById('customPromptModal').classList.add('hidden');
+            if (currentPromptCallback) {
+                const val = document.getElementById('promptModalInput').value.trim();
+                currentPromptCallback(accepted, val);
+                currentPromptCallback = null;
+            }
+        }
 
-                let tabName = `${monthNames[d.getMonth()].toUpperCase()} '${d.getFullYear().toString().substring(2)}`;
-                
-                let btn = document.createElement('button');
-                btn.className = btnClass;
-                btn.textContent = tabName;
-                btn.onclick = async () => {
-                    displayedYear = d.getFullYear();
-                    displayedMonth = d.getMonth();
+        // Mereset ulang pangkalan data simulasi ke nilai default pabrik
+        function resetSimulatedSandbox() {
+            showCustomConfirm("Kembalikan sandbox simulasi ke data awal bawaan?", (confirmed) => {
+                if (confirmed) {
+                    simulatedDatabase = {
+                        'youtube.com': {
+                            'yt-remote-device-id': '{"data":"f6ae5891-b3b3-4f9e-a89c-43f295b28d00","expiration":1801824000000}',
+                            'PREF': 'f1=50000000&tz=Asia.Jakarta',
+                            'VISITOR_INFO1_LIVE': 'zX9wP32qM-8',
+                            'yt_tracker_backup_v1': '{"channel":"My Vlog","balance":3400.5}'
+                        },
+                        'shopee.co.id': {
+                            'SPC_EC': 'T0RreXJ4U2N4SDF2bHphcQ==',
+                            'shopee_user_session': '8b3ad4f9-2c00-4b2a-89aa-cfb95e090f42',
+                            'cart_items_count': '12',
+                            'search_history_cache': '["baju bauhaus", "space mono poster", "vintage retro"]'
+                        },
+                        'github.com': {
+                            'dotcom_user': 'bauhaus_dev_2026',
+                            'logged_in': 'yes',
+                            'tz': 'Asia/Jakarta',
+                            'dashboard_layout_pref': 'column-compact'
+                        }
+                    };
+                    currentSimulatedDomain = 'youtube.com';
+                    populateSimulatedDomains();
+                    renderSimulatedStorageTable();
+                    showToast("Sandbox simulasi telah diatur ulang!");
+                }
+            });
+        }
+
+        // ==================== CORE COMMON ACTIONS & OPERATIONS ====================
+
+        // Menambahkan data baru secara umum (mendeteksi tab yang aktif saat ini)
+        function handleAddNewItem(e) {
+            e.preventDefault();
+            const key = document.getElementById('inputKey').value.trim();
+            const value = document.getElementById('inputValue').value.trim();
+            
+            if (!key) return;
+            
+            if (activeTab === 'real') {
+                // Simpan ke Real window.localStorage
+                try {
+                    localStorage.setItem(key, value);
+                    showToast(`Kunci "${key}" disimpan ke real storage!`);
+                    renderRealStorageTable();
+                } catch(err) {
+                    showToast("Gagal menyimpan: Kuota penyimpanan penuh.");
+                }
+            } else {
+                // Simpan ke virtual database
+                if (!simulatedDatabase[currentSimulatedDomain]) {
+                    simulatedDatabase[currentSimulatedDomain] = {};
+                }
+                simulatedDatabase[currentSimulatedDomain][key] = value;
+                showToast(`Kunci "${key}" disimpan ke domain virtual!`);
+                renderSimulatedStorageTable();
+            }
+            
+            // Bersihkan formulir input
+            document.getElementById('addStorageForm').reset();
+        }
+
+        // Menghapus satu data spesifik
+        function deleteOneItem(mode, key) {
+            showCustomConfirm(`Hapus kunci "${key}" dari penyimpanan?`, (confirmed) => {
+                if (confirmed) {
+                    if (mode === 'real') {
+                        localStorage.removeItem(key);
+                        renderRealStorageTable();
+                    } else {
+                        if (simulatedDatabase[currentSimulatedDomain]) {
+                            delete simulatedDatabase[currentSimulatedDomain][key];
+                        }
+                        renderSimulatedStorageTable();
+                    }
+                    showToast(`Kunci "${key}" berhasil dihapus.`);
+                }
+            });
+        }
+
+        // Memilih / Membatalkan pilihan semua baris
+        function toggleSelectAll(mode) {
+            const masterCheckbox = document.getElementById(mode === 'real' ? 'realMasterCheckbox' : 'simMasterCheckbox');
+            const rowCheckboxes = document.querySelectorAll(mode === 'real' ? '.real-row-checkbox' : '.sim-row-checkbox');
+            
+            rowCheckboxes.forEach(cb => {
+                cb.checked = masterCheckbox.checked;
+            });
+            updateSelectedCount(mode);
+        }
+
+        // Memperbarui penghitung visual baris yang dipilih
+        function updateSelectedCount(mode) {
+            const checkedCount = document.querySelectorAll(mode === 'real' ? '.real-row-checkbox:checked' : '.sim-row-checkbox:checked').length;
+            document.getElementById(mode === 'real' ? 'realSelectCount' : 'simSelectCount').innerText = checkedCount;
+        }
+
+        // Menghapus massal data yang dicentang pengguna
+        function deleteSelected(mode) {
+            const checkedBoxes = document.querySelectorAll(mode === 'real' ? '.real-row-checkbox:checked' : '.sim-row-checkbox:checked');
+            if (checkedBoxes.length === 0) {
+                showToast("Pilih data terlebih dahulu!");
+                return;
+            }
+
+            showCustomConfirm(`Yakin ingin menghapus ${checkedBoxes.length} data terpilih?`, (confirmed) => {
+                if (confirmed) {
+                    checkedBoxes.forEach(box => {
+                        const key = decodeURIComponent(box.getAttribute('data-key'));
+                        if (mode === 'real') {
+                            localStorage.removeItem(key);
+                        } else {
+                            if (simulatedDatabase[currentSimulatedDomain]) {
+                                delete simulatedDatabase[currentSimulatedDomain][key];
+                            }
+                        }
+                    });
                     
-                    // Render seketika agar UI responsif
-                    renderCalendar(); 
-                    
-                    // Lanjut fetch di belakang layar dan render ulang
-                    await fetchHolidaysAPI(displayedYear);
-                    renderCalendar();
-                };
-                monthTabs.appendChild(btn);
+                    showToast(`Selesai menghapus ${checkedBoxes.length} data.`);
+                    if (mode === 'real') {
+                        renderRealStorageTable();
+                    } else {
+                        renderSimulatedStorageTable();
+                    }
+                }
+            });
+        }
+
+        // Menghapus seluruh isi data (Kosongkan)
+        function promptClearAll(mode) {
+            const targetName = mode === 'real' ? 'Real Local Storage' : `Virtual ${currentSimulatedDomain.toUpperCase()}`;
+            showCustomConfirm(`Apakah Anda yakin ingin MENGOSONGKAN SELURUH DATA pada ${targetName}?`, (confirmed) => {
+                if (confirmed) {
+                    if (mode === 'real') {
+                        localStorage.clear();
+                        renderRealStorageTable();
+                    } else {
+                        simulatedDatabase[currentSimulatedDomain] = {};
+                        renderSimulatedStorageTable();
+                    }
+                    showToast("Penyimpanan berhasil dikosongkan.");
+                }
+            });
+        }
+
+        // ==================== CUSTOM MODALS & POPUPS ====================
+
+        // Pengganti fungsional confirm() kustom tanpa memblokir thread halaman
+        function showCustomConfirm(message, callback) {
+            document.getElementById('confirmModalBody').innerText = message;
+            document.getElementById('customConfirmModal').classList.remove('hidden');
+            currentConfirmCallback = callback;
+        }
+
+        function closeConfirmModal(accepted) {
+            document.getElementById('customConfirmModal').classList.add('hidden');
+            if (currentConfirmCallback) {
+                currentConfirmCallback(accepted);
+                currentConfirmCallback = null;
             }
         }
 
-        function renderCalendar() {
-            generateTabs();
-            calendarGrid.innerHTML = '';
-            calendarTitle.textContent = `${fullMonthNames[displayedMonth]} ${displayedYear}`;
-
-            const firstDay = new Date(displayedYear, displayedMonth, 1).getDay();
-            const daysInMonth = new Date(displayedYear, displayedMonth + 1, 0).getDate();
+        // Pengganti fungsional alert() berupa Toast temporer yang elegan
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').innerText = message;
             
-            // Kalkulasi Hari Pencairan
-            const calcData = calculateBRIPaymentDate(displayedYear, displayedMonth);
-            const cairDateNum = calcData.arrivalDate.getDate();
-
-            // Render Kotak Kosong
-            for (let i = 0; i < firstDay; i++) {
-                let emptyDiv = document.createElement('div');
-                emptyDiv.className = "aspect-square brutal-border bg-gray-50 opacity-20 stripes-bg";
-                calendarGrid.appendChild(emptyDiv);
-            }
-
-            // Render Tanggal
-            for (let i = 1; i <= daysInMonth; i++) {
-                let dayDiv = document.createElement('div');
-                let dayOfWeek = new Date(displayedYear, displayedMonth, i).getDay();
-                
-                let checkStr = `${displayedYear}-${String(displayedMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                let holidayName = holidaysData[checkStr];
-                let isHoliday = !!holidayName;
-                
-                let baseClasses = "aspect-square brutal-border relative flex flex-col items-center justify-center font-bold text-base md:text-xl transition-all cursor-default ";
-                let bgClass = "bg-white hover:bg-gray-100 hover:shadow-inner";
-                let iconHtml = "";
-
-                if (i >= 7 && i <= 12) {
-                    bgClass = "bg-retro-yellow hover:bg-yellow-300";
-                    iconHtml = `<i class="fa-solid fa-arrow-trend-up absolute bottom-1 right-1 md:bottom-2 md:right-2 text-[10px] md:text-sm opacity-60"></i>`;
-                } else if (i === 20) {
-                    bgClass = "bg-retro-green hover:bg-green-300";
-                    iconHtml = `<i class="fa-solid fa-circle-check absolute bottom-1 right-1 md:bottom-2 md:right-2 text-[10px] md:text-sm opacity-60"></i>`;
-                } else if (i >= 21 && i <= 26) {
-                    bgClass = "bg-retro-blue hover:bg-blue-300";
-                    iconHtml = `<i class="fa-solid fa-arrows-rotate absolute bottom-1 right-1 md:bottom-2 md:right-2 text-[10px] md:text-sm opacity-60"></i>`;
-                }
-
-                let textClass = (dayOfWeek === 0 || isHoliday) ? "text-red-500" : "text-black";
-
-                // Highlight "CAIR BRI"
-                if (i === cairDateNum) {
-                    bgClass = "bg-black text-white shadow-[inset_0_0_0_3px_#FF66A3] z-10 scale-[1.02]";
-                    textClass = "text-white";
-                    iconHtml = `<span class="absolute bottom-1 bg-retro-pink text-black text-[8px] md:text-[10px] px-1 brutal-border font-mono tracking-tighter">CAIR</span>`;
-                }
-
-                // INDIKATOR TITIK HARI INI (Titik berkedip pojok kanan atas)
-                let isToday = (i === currentDate.getDate() && displayedMonth === currentDate.getMonth() && displayedYear === currentDate.getFullYear());
-                if (isToday) {
-                    iconHtml += `
-                    <span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5 md:h-3 md:w-3 z-20" title="Hari Ini">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-full w-full bg-red-600 border border-black shadow-sm"></span>
-                    </span>`;
-                }
-                
-                // Indikator libur nasional (Bintang merah kecil di pojok kiri atas)
-                if (isHoliday && !isToday && i !== cairDateNum) {
-                    iconHtml += `<span class="absolute top-1 left-1 text-[8px] md:text-[10px] text-red-500" title="${holidayName}"><i class="fa-solid fa-star-of-life"></i></span>`;
-                }
-
-                dayDiv.className = baseClasses + bgClass + " " + textClass;
-                dayDiv.innerHTML = `<span>${i}</span> ${iconHtml}`;
-                calendarGrid.appendChild(dayDiv);
-            }
+            toast.classList.remove('hidden');
+            toast.style.animation = 'none';
+            // Trigger reflow
+            toast.offsetHeight;
+            
+            // Otomatis tutup setelah 3 detik
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
         }
 
-        // Event Listeners Panah Navigasi
-        document.getElementById('prevMonth').addEventListener('click', async () => {
-            displayedMonth--;
-            if (displayedMonth < 0) { displayedMonth = 11; displayedYear--; }
-            
-            renderCalendar(); // Optimistic Render
-            await fetchHolidaysAPI(displayedYear);
-            renderCalendar(); // Render ulang setelah data libur didapat
-        });
-
-        document.getElementById('nextMonth').addEventListener('click', async () => {
-            displayedMonth++;
-            if (displayedMonth > 11) { displayedMonth = 0; displayedYear++; }
-            
-            renderCalendar(); // Optimistic Render
-            await fetchHolidaysAPI(displayedYear);
-            if (displayedMonth === 11) { await fetchHolidaysAPI(displayedYear + 1); }
-            renderCalendar(); // Render ulang setelah data libur didapat
-        });
-
-        // FUNGSI INISIALISASI (Menghilangkan blank di awal)
-        async function initApp() {
-            // 1. Gambar kalender SEGERA MUNGKIN agar tidak ada delay kosong
-            renderCalendar(); 
-            
-            // 2. Lakukan proses fetch API di background
-            await fetchHolidaysAPI(displayedYear);
-            if (displayedMonth === 11) { await fetchHolidaysAPI(displayedYear + 1); }
-            
-            // 3. Render ulang untuk memasukkan hari libur / update kalkulasi final
-            renderCalendar();
+        // ==================== HELPER UTILITIES ====================
+        
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;')
+                      .replace(/</g, '&lt;')
+                      .replace(/>/g, '&gt;')
+                      .replace(/"/g, '&quot;')
+                      .replace(/'/g, '&#039;');
         }
 
-        // Jalankan App
-        initApp();
-
+        function escapeJS(str) {
+            if (!str) return '';
+            return str.replace(/\\/g, '\\\\')
+                      .replace(/'/g, "\\'")
+                      .replace(/"/g, '\\"');
+        }
     </script>
 </body>
 </html>
